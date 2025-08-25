@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Artwork Library – Printrats</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a href="index.html"><img src="assets/img/logo.png" alt="Printrats"></a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="artwork.html">Artwork</a>
+      <a href="studio.html">Design Studio</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <h1>Artwork Library</h1>
+  <p class="lead">Browse available designs or upload your own in the Design Studio.</p>
+  <div id="gallery" class="gallery"></div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div>© 2025 Printrats</div>
+      <div class="row">
+        <a href="business.html">Business</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+async function loadGallery() {
+  const res = await fetch('assets/artwork/index.json?_=' + Date.now());
+  const ARTWORKS = await res.json();
+
+  const gallery = document.getElementById('gallery');
+  gallery.innerHTML = ARTWORKS.map(a => `
+    <div class="tile">
+      <img src="${a.file}" alt="${a.title}">
+      <div class="meta">
+        <div>
+          <strong>${a.title}</strong>
+          <div class="badge">${a.category || 'Uncategorised'}</div>
+        </div>
+        <div class="row">
+          <a class="btn" href="studio.html?product=tshirt&color=white&art=${encodeURIComponent(a.file)}">T-shirt</a>
+          <a class="btn" href="studio.html?product=hoodie&color=black&art=${encodeURIComponent(a.file)}">Hoodie</a>
+          <a class="btn" href="studio.html?product=mug&color=white&art=${encodeURIComponent(a.file)}">Mug</a>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+loadGallery();
+</script>
+
+</body>
+</html>
