@@ -1,0 +1,12 @@
+[
+  {
+    "file": "assets/artwork/sample1.png",
+    "title": "Sample Artwork 1",
+    "category": "Abstract"
+  },
+  {
+    "file": "assets/artwork/sample2.png",
+    "title": "Sample Artwork 2",
+    "category": "Typography"
+  }
+]
